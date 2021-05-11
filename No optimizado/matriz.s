@@ -111,8 +111,8 @@ main:
     ; Dividimos a1+a4/Det
     ; f24/f29
     divf    f30,f24,f29    ; f30: Resultado Divis
-
-    addi r1,r0,#64 ; 16*4
+    
+    addi r1,r0,#60 ; 16*4= 64 -16
 
     ; Hacemos la multiplicacion del vector Mion
     ;m11
@@ -181,40 +181,41 @@ main:
 
     multf   f15,f23,f30
     sf      M(r1), f15
-    subi    r1,r1,#4    
+    ;subi    r1,r1,#4    
     ;---------------
-    addi r2,r1,#16 ; 4*4
+    
+    addi r1,r0,#12 ; 4*4
 
     ;VM=[m11*m21 M12*M22 M13*M23 M14*M24)]
     multf   f0,f0,f4
-    sf      VM(r2), f0
-    subi    r2,r2,#4 
+    sf      VM(r1), f0
+    subi    r1,r1,#4 
     multf   f1,f1,f5
-    sf      VM(r2), f1
-    subi    r2,r2,#4 
+    sf      VM(r1), f1
+    subi    r1,r1,#4 
     multf   f2,f2,f6
-    sf      VM(r2), f2
-    subi    r2,r2,#4 
+    sf      VM(r1), f2
+    subi    r1,r1,#4 
     multf   f3,f3,f7
-    sf      VM(r2), f3
-    subi    r2,r2,#4 
+    sf      VM(r1), f3
+    ;subi    r1,r1,#4 
 
-    addi r3,r2,#16 ; 4*4
+    addi r1,r0,#12 ; 4*4
 
     ;HM=[M31*M41 M32*M42 M33*M43 M34*M44]
 
     multf   f8,f8,f12
-    sf      HM(r2), f8
-    subi    r2,r2,#4 
+    sf      HM(r1), f8
+    subi    r1,r1,#4 
     multf   f9,f9,f13
-    sf      HM(r2), f9
-    subi    r2,r2,#4
+    sf      HM(r1), f9
+    subi    r1,r1,#4
     multf   f10,f10,f14
-    sf      HM(r2), f10
-    subi    r2,r2,#4
+    sf      HM(r1), f10
+    subi    r1,r1,#4
     multf   f11,f11,f15
-    sf      HM(r2), f11
-    subi    r2,r2,#4
+    sf      HM(r1), f11
+    ;subi    r1,r1,#4
     
     ;check = 𝑣𝑚1 +𝑣𝑚2 + 𝑣𝑚3 + 𝑣𝑚4 + ℎ𝑚1 + ℎ𝑚2 + ℎ𝑚3 + ℎ𝑚4
     addf  f12,f0,f1 ; VM(0) --> f0 VM(4) --> f1
@@ -227,7 +228,9 @@ main:
 
     sf check,f12
 	
-	;lf d30,check
+    addi r1,r0,#12
+	lf f0,HM(r1)
+    lf f1,VM(r1)
     
 acabar:
 
