@@ -227,16 +227,7 @@ main:
     addf  f12,f12,f11
 
     sf check,f12
-	;valores 1,3,5,7
-    addi r1,r0,#60
-	lf f0,M(r1)
-    subi r1,r1,#8
-    lf f1,M(r1)
-    subi r1,r1,#8
-    lf f2,M(r1)
-    subi r1,r1,#8
-    lf f3,M(r1)
-    subi r1,r1,#8
+	
     
 acabar:
 
