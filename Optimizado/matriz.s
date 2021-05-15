@@ -135,14 +135,14 @@ main:
     
     
     ;m13
-    multf   f2,f10,f30
+    multf   f2,f10,f30;f10
     sf      M(r1), f1
     subi    r1,r1,#4 
 
      
     ;m14
     multf   f3,f11,f30
-    sf      M(r1), F2
+    sf      M(r1), f2
     subi    r1,r1,#4 
        
     ;-----------
@@ -173,7 +173,7 @@ main:
     subi    r1,r1,#4 
     
 
-    multf   f9,f17,f30
+    multf   f9,f17,f30;f17
     sf      M(r1), f8
     subi    r1,r1,#4
      
@@ -246,18 +246,20 @@ main:
     addf  f20,f20,f3
     sf      HM(r1), f8
     subi    r1,r1,#4 
-    
-    multf   f10,f10,f14
     addf  f20,f20,f8
+    multf   f10,f10,f14
     addf  f20,f20,f9
-    multf   f11,f11,f15
     sf      HM(r1), f9
     subi    r1,r1,#4
+    multf   f11,f11,f15
+    
+    
+    
     
     addf  f20,f20,f10
     sf      HM(r1), f10
-    addf  f20,f20,f11
     subi    r1,r1,#4
+    addf  f20,f20,f11
     sf      HM(r1), f11
     ;subi    r1,r1,#4
     
