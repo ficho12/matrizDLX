@@ -35,43 +35,56 @@ main:
     ;MF(a1,a2)    ;MF(a3,a4)
     lf      f0, a1      ; f0: a11
     lf      f1, a2      ; f1: a21
+    multf   f3,f0,f1    ; f3: a22 a1*a2
     divf    f2,f0,f1    ; f2: a12 a1/a2
+    lf      f4, a3  ; f4: b11
+
+    multf   f8,f0,f4     ;a11b11: f0*f4
 
     
-    lf      f4, a3      ; f4: b11
     lf      f5, a4      ; f5: b21
+    multf   f7,f4,f5    ; f7: b22 a3*a4
+    addf	f24,f0,f5   ;a1+a4
+    multf   f26,f1,f4    ; f26: c22 a2*a3
+        ;a11b21: f0*f5
+    
+    multf   f13,f0,f7
     divf    f6,f4,f5    ; f6: b12 a1/a2
-    multf   f3,f0,f1    ; f3: a22 a1*a2
-    multf   f7,f4,f5    ; f7: b22 a1*a2
+    multf   f12,f0,f5
+    ;a11b22: f0*f7
+    
 
     ; Calculamos producto de Kronecker
     ; Primera Fila
 
-    ;a11b11: f0*f4
-    multf   f8,f0,f4
-    ;a11b12: f0*f6
-    multf   f9,f0,f6
+    
+    
     ;a12b11: f2*f4
     multf   f10,f2,f4
-    ;a12b12: f2*f6
-    multf   f11,f2,f6
 
-    divf    f25,f1,f4    ; f25: c12 a2/a3
-    multf   f26,f1,f4    ; f26: c22 a2*a3
-    ;a1+a4
-    addf	f24,f0,f5
+
+    
+ 
 
     ; Segunda Fila
 
-    ;a11b21: f0*f5
-    multf   f12,f0,f5
-    ;a11b22: f0*f7
-    multf   f13,f0,f7
-    ;a12b21: f2*f5
-    multf   f14,f2,f5
+
+    
     ;a12b22: f2*f7
     multf   f15,f2,f7
 
+    ;a12b21: f2*f5
+    multf   f14,f2,f5
+
+    divf    f25,f1,f4    ; f25: c12 a2/a3
+
+
+
+    ;a11b12: f0*f6
+    multf   f9,f0,f6
+
+    ;a21b11: f1*f4
+    multf   f16,f1,f4
 
 
     ;MF(a2,a3) =>
@@ -84,16 +97,19 @@ main:
 
     multf   f27,f1,f26    ; f27 Det
     multf   f28,f25,f4    ; f28 Det
-    ; Tercera Fila
-
-    ;a21b11: f1*f4
-    multf   f16,f1,f4
-    subf    f29,f27,f28   ; f29: Resultado
-    ;a21b12: f1*f6
+        ;a21b12: f1*f6
     multf   f17,f1,f6
+    subf    f29,f27,f28   ; f29: Resultado
+      ;a12b12: f2*f6
+    multf   f11,f2,f6
+    ; Tercera Fila
+    divf    f30,f24,f29    ; f30: Resultado Divis    
+
+
+
+
     ;a22b11: f3*f4
     multf   f18,f3,f4
-    divf    f30,f24,f29    ; f30: Resultado Divis    
     ;a22b12: f3*f6
     multf   f19,f3,f6
 
