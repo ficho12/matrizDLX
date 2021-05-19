@@ -90,13 +90,16 @@ main:
 
 
 
+
+
+
+    ;a21b11: f1*f4
+    multf   f16,f1,f4
+
     ;a11b12: f0*f6
     multf   f9,f0,f6
 
     divf    f25,f1,f4    ; f25: c12 a2/a3
-
-    ;a21b11: f1*f4
-    multf   f16,f1,f4
 
 
     ;MF(a2,a3) =>
@@ -117,17 +120,16 @@ main:
       
 
 
-
+    multf   f28,f25,f4    ; f28 Det
 
     ;a22b11: f3*f4
     multf   f18,f3,f4
 
+    subf    f29,f27,f28   ; f29: Resultado
     
-    multf   f28,f25,f4    ; f28 Det
     ;a22b12: f3*f6
     multf   f19,f3,f6
 
-    subf    f29,f27,f28   ; f29: Resultado
 
 
     eqf     f29,f31      ;compara si f1=0
