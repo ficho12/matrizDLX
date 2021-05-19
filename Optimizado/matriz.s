@@ -126,7 +126,6 @@ main:
     multf   f18,f3,f4
 
     subf    f29,f27,f28   ; f29: Resultado
-    
     ;a22b12: f3*f6
     multf   f19,f3,f6
 
