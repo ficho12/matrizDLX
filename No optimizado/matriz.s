@@ -35,11 +35,16 @@ main:
     ;MF(a1,a2)
     lf      f0, a1      ; f0: a11
     lf      f1, a2      ; f1: a21
+    lf      f31, #0
+    eqf     f1,f31      ;compara si f1=0
+    bfpt    acabar
     divf    f2,f0,f1    ; f2: a12 a1/a2
     multf   f3,f0,f1    ; f3: a22 a1*a2
     ;MF(a3,a4)
     lf      f4, a3      ; f4: b11
     lf      f5, a4      ; f5: b21
+    eqf     f5,f31      ;compara si f5=0
+    bfpt    acabar
     divf    f6,f4,f5    ; f6: b12 a1/a2
     multf   f7,f4,f5    ; f7: b22 a1*a2
 
@@ -96,6 +101,8 @@ main:
     ;(a3    a2*a3)
     ; f1: a2=c11
     ; f4: a3=c21
+    eqf     f4,f31      ;compara si f4=0
+    bfpt    acabar
     divf    f25,f1,f4    ; f25: c12 a2/a3
     multf   f26,f1,f4    ; f26: c22 a2*a3
     ;(f1    f25)
@@ -108,6 +115,8 @@ main:
     multf   f28,f25,f4    ; f28 Det
     subf    f29,f27,f28   ; f29: Resultado
     
+    eqf     f29,f31      ;compara si f29=0
+    bfpt    acabar
     ; Dividimos a1+a4/Det
     ; f24/f29
     divf    f30,f24,f29    ; f30: Resultado Divis
